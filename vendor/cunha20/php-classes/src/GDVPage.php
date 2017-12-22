@@ -22,7 +22,7 @@ class GDVPage {
       $this->aOptions = array_merge($this->aDefaults, $xOptions);
       $aConfig = array(
           "tpl_dir" => $_SERVER["DOCUMENT_ROOT"] . "/views/",
-          "cache_dir" => $_SERVER["DOCUMENT_ROOT"] . "/views/cache/"
+          "cache_dir" => $_SERVER["DOCUMENT_ROOT"] . "/views-cache/"
       );
       Tpl::configure($aConfig);
       $this->oTpl = new Tpl;
