@@ -18,10 +18,10 @@ class GDVPage {
       endforeach;
    }
 
-   public function __construct($xOptions = array()) {
+   public function __construct($xOptions = array(), $xTplDir = "/views/") {
       $this->aOptions = array_merge($this->aDefaults, $xOptions);
       $aConfig = array(
-          "tpl_dir" => $_SERVER["DOCUMENT_ROOT"] . "/views/",
+          "tpl_dir" => $_SERVER["DOCUMENT_ROOT"] . $xTplDir,
           "cache_dir" => $_SERVER["DOCUMENT_ROOT"] . "/views-cache/"
       );
       Tpl::configure($aConfig);
