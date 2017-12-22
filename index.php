@@ -1,19 +1,17 @@
-<?php 
+<?php
 
 require_once("vendor/autoload.php");
 
-$app = new \Slim\Slim();
+use Slim\Slim;
+use Cunha20\GDVPage;
 
-$app->config('debug', true);
+$oApp = new Slim();
 
-$app->get('/', function() {
-    
-	$sql = new Cunha20\DB\Sql();
-        $results = $sql->select("SELECT * FROM tb_users");
-        echo json_encode($results);        
+$oApp->config('debug', true);
 
+$oApp->get('/', function() {
+   $oGDVPage = new GDVPage();
+   $oGDVPage->setTpl("index");
 });
 
-$app->run();
-
- ?>
+$oApp->run();
