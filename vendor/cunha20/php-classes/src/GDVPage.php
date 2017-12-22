@@ -9,6 +9,8 @@ class GDVPage {
    private $oTpl;
    private $aOptions;
    private $aDefaults = [
+       "header" => true,
+       "footer" => true,
        "data" => [],
    ];
 
@@ -27,7 +29,9 @@ class GDVPage {
       Tpl::configure($aConfig);
       $this->oTpl = new Tpl;
       $this->setData($this->aOptions["data"]);
-      $this->oTpl->draw("header");
+      if ($this->aOptions["header"]):
+         $this->oTpl->draw("header");
+      endif;
    }
 
    public function setTpl($xName, $xData = array(), $xHtml = false) {
@@ -36,7 +40,9 @@ class GDVPage {
    }
 
    public function __destruct() {
-      $this->oTpl->draw("footer");
+      if ($this->aOptions["footer"]):
+         $this->oTpl->draw("footer");
+      endif;
    }
 
 }
