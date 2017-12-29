@@ -11,7 +11,7 @@ class GDVModel {
       $cFieldName = substr($xName, 3, strlen($xName));
       switch ($cMethod):
          case "get":
-            return $this->aData[$cFieldName];
+            return (isset($this->aData[$cFieldName]) ? $this->aData[$cFieldName] : NULL);
          case "set":
             $this->aData[$cFieldName] = $xArgs[0];
             break;

@@ -7,18 +7,12 @@ use Rain\Tpl;
 class GDVPage {
 
    private $oTpl;
-   private $aOptions;
+   private $aOptions = [];
    private $aDefaults = [
        "header" => true,
        "footer" => true,
        "data" => [],
    ];
-
-   private function setData($xData = array()) {
-      foreach ($xData as $key->$value):
-         $this->oTpl->assign($key, $value);
-      endforeach;
-   }
 
    public function __construct($xOptions = array(), $xTplDir = "/views/") {
       $this->aOptions = array_merge($this->aDefaults, $xOptions);
@@ -28,9 +22,17 @@ class GDVPage {
       );
       Tpl::configure($aConfig);
       $this->oTpl = new Tpl;
-      $this->setData($this->aOptions["data"]);
+      if ($this->aOptions["data"]):
+         $this->setData($this->aOptions["data"]);
+      endif;
       if ($this->aOptions["header"]):
          $this->oTpl->draw("header");
+      endif;
+   }
+
+   public function __destruct() {
+      if ($this->aOptions["footer"]):
+         $this->oTpl->draw("footer");
       endif;
    }
 
@@ -39,10 +41,10 @@ class GDVPage {
       $this->oTpl->draw($xName, $xHtml);
    }
 
-   public function __destruct() {
-      if ($this->aOptions["footer"]):
-         $this->oTpl->draw("footer");
-      endif;
+   private function setData($xData = array()) {
+      foreach ($xData as $key=>$value):
+         $this->oTpl->assign($key, $value);
+      endforeach;
    }
 
 }
